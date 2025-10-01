@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerita Tentang Kita</title>
+    <title>Untukmu, Bintangku</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -15,66 +15,93 @@
         <source src="musik.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="hearts-container"></div>
+    <div id="particle-canvas"></div>
 
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="main-title">Untukmu, Inspirasiku</h1>
-            <p class="subtitle">Sebuah kilas balik dari perjalanan indah kita.</p>
-            <button id="start-journey-button">Mulai Cerita Kita</button>
+            <h1 id="typed-title" class="main-title"></h1>
+            <p class="subtitle fade-in-up">Sebuah perjalanan hati yang tak terlupakan.</p>
+            <button id="start-journey-button" class="cta-button pulse">Mulai Kisah Kita</button>
         </div>
+        
+        <div class="floating-photos-container">
+            <img src="foto1.png" alt="Foto Kenangan 1" class="floating-photo" style="--i:1;">
+            <img src="foto1.png" alt="Foto Kenangan 2" class="floating-photo" style="--i:2;">
+            <img src="foto1.png" alt="Foto Kenangan 3" class="floating-photo" style="--i:3;">
+            <img src="foto1.png" alt="Foto Kenangan 4" class="floating-photo" style="--i:4;">
+            <img src="foto1.png" alt="Foto Kenangan 5" class="floating-photo" style="--i:5;">
+        </div>
+
         <a href="#story" class="scroll-down-indicator">
             <span></span>
+            <p>Scroll</p>
         </a>
     </section>
 
     <main id="story" class="story-container">
 
-        <section class="story-block layout-left-image">
-            <div class="story-image">
-                <img src="foto1.png" alt="Awal Mula Cerita Kita">
+        <section class="story-block layout-split-left animate-on-scroll" data-animation="fade-left">
+            <div class="story-image-wrapper">
+                <img src="fotO1.png" alt="Momen Awal">
+                <p class="image-caption">Momen pertama yang selalu terukir.</p>
             </div>
             <div class="story-text">
-                <h2>Awal Mula yang Tak Terlupa</h2>
-                <p>Aku masih ingat hari itu dengan jelas. Saat pertama kali mata kita bertemu, ada sesuatu yang berbeda. Siapa sangka, dari sebuah sapaan sederhana, lahirlah cerita seindah ini.</p>
+                <h3>Bab 1: Dimulai Dengan Sebuah Tatapan</h3>
+                <p>Mungkin terdengar klise, tapi dunia serasa berhenti saat pandangan kita bertemu. Sejak detik itu, aku tahu ada sesuatu yang istimewa yang baru saja dimulai.</p>
             </div>
         </section>
 
-        <section class="story-block layout-right-image">
-            <div class="story-image">
-                <img src="foto2.png" alt="Tawa yang Selalu Kurindu">
-            </div>
+        <section class="story-block layout-split-right animate-on-scroll" data-animation="fade-right">
             <div class="story-text">
-                <h2>Tawa yang Selalu Kurindu</h2>
-                <p>Mendengar tawamu adalah musik terindah. Terima kasih sudah membawa begitu banyak warna dan kebahagiaan ke dalam hari-hariku yang terkadang kelabu.</p>
+                <h3>Bab 2: Tawa dan Air Mata yang Berharga</h3>
+                <p>Kita telah berbagi tawa hingga perut sakit, dan juga air mata yang menguatkan. Setiap emosi yang kita rasakan bersama membentuk ikatan yang tak akan pernah putus.</p>
+            </div>
+            <div class="story-image-wrapper">
+                <img src="fotO1.png" alt="Tawa Bersama">
+                <p class="image-caption">Tawamu adalah melodi favoritku.</p>
             </div>
         </section>
 
-        <section class="story-block layout-left-image">
-            <div class="story-image">
-                <img src="foto3.png" alt="Menjelajah Dunia Bersama">
+        <section class="story-block layout-full-width animate-on-scroll" data-animation="zoom-in">
+            <div class="story-image-full">
+                <img src="fotO1.png" alt="Petualangan Kita">
+                <p class="image-caption">Bersamamu, setiap tempat adalah petualangan.</p>
             </div>
-            <div class="story-text">
-                <h2>Menjelajah Dunia Bersama</h2>
-                <p>Setiap perjalanan bersamamu, entah itu jauh atau dekat, selalu terasa seperti petualangan besar. Karena rumahku bukanlah tempat, melainkan dirimu.</p>
+            <div class="story-text-full">
+                <h3>Bab 3: Jejak Kaki di Setiap Perjalanan</h3>
+                <p>Dari puncak gunung hingga pantai berpasir, setiap jejak langkah kita adalah cerita. Kamu membuat setiap perjalanan terasa seperti pulang.</p>
             </div>
         </section>
         
-        <section class="story-block layout-right-image">
-            <div class="story-image">
-                <img src="foto4.png" alt="Genggaman Tangan yang Menguatkan">
+        <section class="story-block layout-split-left animate-on-scroll" data-animation="slide-up">
+            <div class="story-image-wrapper">
+                <img src="fotO1.png" alt="Ketenangan">
+                <p class="image-caption">Dalam pelukmu kutemukan ketenangan.</p>
             </div>
             <div class="story-text">
-                <h2>Genggaman yang Menguatkan</h2>
-                <p>Di saat aku merasa rapuh, genggaman tanganmu cukup untuk memberiku kekuatan. Kamu adalah penopang dan sumber semangat terbesarku.</p>
+                <h3>Bab 4: Sebuah Pelukan Hangat</h3>
+                <p>Ketika dunia terasa terlalu bising, pelukanmu adalah tempat paling tenang. Terima kasih telah selalu menjadi sandaran hatiku.</p>
             </div>
         </section>
+
+        <section class="story-block layout-split-right animate-on-scroll" data-animation="fade-right">
+            <div class="story-text">
+                <h3>Bab 5: Masa Depan yang Kita Impikan</h3>
+                <p>Aku tak sabar menantikan setiap babak selanjutnya dalam kisah kita. Bersamamu, masa depan terasa begitu cerah dan penuh harapan.</p>
+            </div>
+            <div class="story-image-wrapper">
+                <img src="fotO1.png" alt="Masa Depan">
+                <p class="image-caption">Menatap masa depan, berdua.</p>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="final-message">
-        <h2>Perjalanan Ini Belum Berakhir...</h2>
-        <p>Ini hanyalah beberapa bab dari buku cerita kita yang akan terus kita tulis bersama. Terima kasih telah menjadi dirimu. Aku mencintaimu, hari ini dan selamanya.</p>
+    <footer class="final-message animate-on-scroll" data-animation="fade-up">
+        <h2 class="great-vibes">Dari Hati Terdalamku Untukmu</h2>
+        <p>Setiap detik bersamamu adalah keajaiban. Terima kasih untuk semua kenangan indah, tawa, dan cinta yang tak terhingga. Kamu adalah duniaku.</p>
+        <p class="signature">With All My Love,</p>
     </footer>
     
     <div id="lightbox-modal" class="modal">
