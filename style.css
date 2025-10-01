@@ -1,0 +1,255 @@
+/* Pengaturan Dasar & Font */
+:root {
+    --primary-font: 'Poppins', sans-serif;
+    --heading-font: 'Playfair Display', serif;
+    --text-color: #333;
+    --accent-color: #d87093; 
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Background Animasi Gradient */
+body {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    overflow-x: hidden;
+    background: linear-gradient(125deg, #fce4ec, #f8cdda, #fff0f5, #e6d4e1);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* Halaman Pembuka (Hero Section) */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    background-image: url('hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInHero 1.5s 0.5s forwards;
+}
+
+@keyframes fadeInHero { to { opacity: 1; transform: translateY(0); } }
+
+.main-title {
+    font-family: var(--heading-font);
+    font-size: 4.5rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+#start-journey-button {
+    margin-top: 30px;
+    padding: 15px 35px;
+    font-size: 1rem;
+    font-family: var(--primary-font);
+    font-weight: bold;
+    color: var(--accent-color);
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#start-journey-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+}
+
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 24px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.scroll-down-indicator span {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    background-color: white;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    animation: scrollAnim 2s infinite;
+}
+
+@keyframes scrollAnim {
+    0% { opacity: 1; top: 8px; }
+    100% { opacity: 0; top: 20px; }
+}
+
+/* Kontainer Cerita */
+.story-container {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.story-block {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 100px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.story-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.layout-right-image {
+    flex-direction: row-reverse;
+}
+
+/* Border Gambar ala Polaroid */
+.story-image {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 15px 15px 70px 15px;
+    border-radius: 3px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    transform: rotate(-2deg); 
+}
+
+.layout-right-image .story-image {
+    transform: rotate(2deg);
+}
+
+.story-block:hover .story-image {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+}
+
+.story-image img {
+    width: 100%;
+    display: block;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text h2 {
+    font-family: var(--heading-font);
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.story-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* Footer Pesan Penutup */
+.final-message {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.final-message h2 {
+    font-family: var(--heading-font);
+    font-size: 3rem;
+    color: var(--accent-color);
+}
+
+/* Animasi Partikel Hati */
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: var(--accent-color);
+    animation: floatUp 10s linear infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Modal Lightbox */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+.modal-content { margin: auto; display: block; max-width: 85%; max-height: 85%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: zoomIn 0.3s; }
+@keyframes zoomIn { from {transform: translate(-50%,-50%) scale(0.5)} to {transform: translate(-50%,-50%) scale(1)} }
+.close-button { position: absolute; top: 20px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; }
+
+/* Responsif untuk Mobile */
+@media (max-width: 768px) {
+    .main-title { font-size: 2.8rem; }
+    .subtitle { font-size: 1.2rem; }
+    
+    .story-block, .layout-right-image {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .story-image, .layout-right-image .story-image {
+        transform: rotate(0deg);
+    }
+}

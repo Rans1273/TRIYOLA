@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerita Tentang Kita</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="background-music" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="hearts-container"></div>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="main-title">Untukmu, Inspirasiku</h1>
+            <p class="subtitle">Sebuah kilas balik dari perjalanan indah kita.</p>
+            <button id="start-journey-button">Mulai Cerita Kita</button>
+        </div>
+        <a href="#story" class="scroll-down-indicator">
+            <span></span>
+        </a>
+    </section>
+
+    <main id="story" class="story-container">
+
+        <section class="story-block layout-left-image">
+            <div class="story-image">
+                <img src="foto1.png" alt="Awal Mula Cerita Kita">
+            </div>
+            <div class="story-text">
+                <h2>Awal Mula yang Tak Terlupa</h2>
+                <p>Aku masih ingat hari itu dengan jelas. Saat pertama kali mata kita bertemu, ada sesuatu yang berbeda. Siapa sangka, dari sebuah sapaan sederhana, lahirlah cerita seindah ini.</p>
+            </div>
+        </section>
+
+        <section class="story-block layout-right-image">
+            <div class="story-image">
+                <img src="foto2.png" alt="Tawa yang Selalu Kurindu">
+            </div>
+            <div class="story-text">
+                <h2>Tawa yang Selalu Kurindu</h2>
+                <p>Mendengar tawamu adalah musik terindah. Terima kasih sudah membawa begitu banyak warna dan kebahagiaan ke dalam hari-hariku yang terkadang kelabu.</p>
+            </div>
+        </section>
+
+        <section class="story-block layout-left-image">
+            <div class="story-image">
+                <img src="foto3.png" alt="Menjelajah Dunia Bersama">
+            </div>
+            <div class="story-text">
+                <h2>Menjelajah Dunia Bersama</h2>
+                <p>Setiap perjalanan bersamamu, entah itu jauh atau dekat, selalu terasa seperti petualangan besar. Karena rumahku bukanlah tempat, melainkan dirimu.</p>
+            </div>
+        </section>
+        
+        <section class="story-block layout-right-image">
+            <div class="story-image">
+                <img src="foto4.png" alt="Genggaman Tangan yang Menguatkan">
+            </div>
+            <div class="story-text">
+                <h2>Genggaman yang Menguatkan</h2>
+                <p>Di saat aku merasa rapuh, genggaman tanganmu cukup untuk memberiku kekuatan. Kamu adalah penopang dan sumber semangat terbesarku.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="final-message">
+        <h2>Perjalanan Ini Belum Berakhir...</h2>
+        <p>Ini hanyalah beberapa bab dari buku cerita kita yang akan terus kita tulis bersama. Terima kasih telah menjadi dirimu. Aku mencintaimu, hari ini dan selamanya.</p>
+    </footer>
+    
+    <div id="lightbox-modal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="lightbox-image">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
