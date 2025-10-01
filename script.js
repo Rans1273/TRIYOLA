@@ -1,161 +1,144 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // --- BAGIAN 1: PENGATURAN AWAL & REFERENSI ELEMEN ---
     const music = document.getElementById('background-music');
     const startButton = document.getElementById('start-journey-button');
-    const heroSection = document.querySelector('.hero-section');
     const typedTitle = document.getElementById('typed-title');
     const floatingPhotos = document.querySelectorAll('.floating-photo');
-
-    // --- 1. Animasi Teks Ketik di Halaman Depan ---
-    const titleText = "Untukmu, Bintangku."; // Ganti teks judul di sini
-    let i = 0;
-    function typeWriter() {
-        if (i < titleText.length) {
-            typedTitle.innerHTML += titleText.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100); // Kecepatan ketikan
-        }
-    }
-    
-    // Panggil typewriter segera setelah DOMContentLoaded
-    typeWriter();
-
-    // --- 2. Memulai Musik & Cerita dari Halaman Depan ---
-    startButton.addEventListener('click', () => {
-        music.play().catch(error => console.log("Interaksi pengguna dibutuhkan untuk memutar audio."));
-        
-        // Animasi fade out hero section
-        heroSection.style.opacity = '0';
-        heroSection.style.transition = 'opacity 1s ease-out';
-        
-        setTimeout(() => {
-            heroSection.style.display = 'none';
-            // Scroll ke bagian cerita setelah hero section hilang
-            document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
-        }, 1000); // Sesuaikan dengan durasi transisi
-
-        // Mulai animasi partikel latar belakang setelah tombol diklik
-        initParticles();
-    });
-
-    // --- 3. Animasi Foto Melayang di Halaman Depan ---
-    floatingPhotos.forEach((photo, index) => {
-        // Atur posisi awal acak di sekitar hero section
-        photo.style.top = Math.random() * 80 + 10 + 'vh'; // 10% to 90%
-        photo.style.left = Math.random() * 80 + 10 + 'vw'; // 10% to 90%
-        
-        // Atur rotasi awal acak
-        const initialRotation = Math.random() * 30 - 15; // -15deg to +15deg
-        photo.style.setProperty('--initial-rotation', `${initialRotation}deg`);
-        
-        // Jadikan foto terlihat setelah beberapa detik
-        setTimeout(() => {
-            photo.classList.add('visible');
-        }, 1000 + (index * 300)); // Delay setiap foto
-    });
-
-
-    // --- 4. Animasi Scroll-Reveal untuk Blok Cerita ---
+    const storyContainer = document.getElementById('story');
     const storyBlocks = document.querySelectorAll('.animate-on-scroll');
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Hentikan observasi setelah terlihat
-            }
-        });
-    }, {
-        threshold: 0.2, // Elemen dianggap terlihat jika 20% masuk viewport
-        rootMargin: '0px 0px -10% 0px' // Mulai animasi sedikit lebih awal
-    });
-
-    storyBlocks.forEach(block => {
-        observer.observe(block);
-    });
-
-    // --- 5. Fungsi Lightbox (Modal Gambar) ---
-    const modal = document.getElementById('lightbox-modal');
-    const modalImg = document.getElementById('lightbox-image');
-    const allImages = document.querySelectorAll('.story-image-wrapper img, .story-image-full img'); // Pilih semua gambar cerita
-    const closeBtn = document.querySelector('.close-button');
-
-    allImages.forEach(img => {
-        img.parentElement.addEventListener('click', () => {
-            modal.style.display = 'block';
-            modalImg.src = img.src;
-        });
-    });
-
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (event) => {
-        if (event.target == modal) {
-            closeModal();
-        }
-    });
-
-    // --- 6. Animasi Partikel di Latar Belakang (Lebih Canggih) ---
     const particleCanvas = document.getElementById('particle-canvas');
-    let particles = [];
-    const numParticles = 50;
+    const body = document.body;
 
-    function initParticles() {
-        for (let i = 0; i < numParticles; i++) {
-            createParticle();
-        }
-    }
+    // --- BAGIAN 2: FUNGSI-FUNGSI UTAMA ---
 
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particleCanvas.appendChild(particle);
-
-        // Gaya acak
-        const size = Math.random() * 4 + 2; // 2-6px
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`; // Warna acak
-        particle.style.borderRadius = '50%'; // Lingkaran
-        particle.style.position = 'absolute';
-        particle.style.opacity = Math.random() * 0.7 + 0.3;
-        particle.style.boxShadow = `0 0 ${size/2}px ${size/3}px var(--light-accent-color)`;
-        
-        resetParticle(particle);
-
-        particles.push(particle);
-    }
-
-    function resetParticle(particle) {
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.top = '100vh'; // Mulai dari bawah
-        particle.style.animation = 'none'; // Reset animasi
-        void particle.offsetWidth; // Trigger reflow
-        
-        // Animasi float ke atas dengan durasi acak
-        const duration = Math.random() * 10 + 10; // 10-20s
-        const delay = Math.random() * 5; // 0-5s
-        const translateX = Math.random() * 200 - 100; // -100px to 100px
-        const rotateZ = Math.random() * 720 - 360; // -360deg to 360deg
-
-        particle.style.animation = `particleFloat ${duration}s linear ${delay}s infinite, 
-                                     particleTwinkle ${Math.random() * 2 + 1}s infinite alternate`;
-        particle.style.setProperty('--translate-x', `${translateX}px`);
-        particle.style.setProperty('--rotate-z', `${rotateZ}deg`);
-
-        // Ketika animasi selesai, reset posisi untuk loop
-        particle.addEventListener('animationiteration', () => {
-            // Hanya reset jika bukan animasi twinkle
-            if (particle.style.animationName.includes('particleFloat')) {
-                resetParticle(particle);
+    /**
+     * Fungsi untuk animasi teks ketik pada judul utama.
+     */
+    function startTypingEffect() {
+        const titleText = "Untukmu, Bintangku.";
+        let i = 0;
+        typedTitle.innerHTML = '';
+        function typeWriter() {
+            if (i < titleText.length) {
+                typedTitle.innerHTML += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
             }
+        }
+        typeWriter();
+    }
+
+    /**
+     * Fungsi utama yang dijalankan saat tombol "Jelajahi Cerita Kita" ditekan.
+     */
+    function startJourney() {
+        // 1. Putar musik
+        music.play().catch(error => {
+            console.error("Gagal memutar musik:", error);
+        });
+
+        // 2. Aktifkan kembali scroll
+        body.classList.remove('no-scroll');
+
+        // 3. Scroll otomatis ke bagian cerita
+        storyContainer.scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        // 4. Jalankan animasi partikel
+        initParticles();
+        
+        // 5. Sembunyikan tombol setelah diklik agar tidak mengganggu
+        startButton.style.display = 'none';
+    }
+
+    /**
+     * Menampilkan foto-foto yang melayang di halaman depan.
+     */
+    function showFloatingPhotos() {
+        floatingPhotos.forEach((photo, index) => {
+            setTimeout(() => {
+                photo.classList.add('visible');
+            }, 500 + (index * 400));
         });
     }
 
-    // Keyframes untuk partikel (perlu ditambahkan ke CSS)
-    // Saya letakkan di CSS untuk kemudahan
+    /**
+     * Pengaturan Intersection Observer untuk animasi blok cerita saat scroll.
+     */
+    function setupScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: "0px 0px -50px 0px"
+        });
+        storyBlocks.forEach(block => observer.observe(block));
+    }
 
+    /**
+     * Pengaturan Lightbox untuk memperbesar gambar.
+     */
+    function setupLightbox() {
+        const modal = document.getElementById('lightbox-modal');
+        const modalImg = document.getElementById('lightbox-image');
+        const allImages = document.querySelectorAll('.story-image-wrapper, .story-image-full');
+        const closeBtn = document.querySelector('.close-button');
+
+        allImages.forEach(imageContainer => {
+            imageContainer.addEventListener('click', () => {
+                const imgSrc = imageContainer.querySelector('img').src;
+                modal.style.display = 'block';
+                modalImg.src = imgSrc;
+            });
+        });
+        function closeModal() { modal.style.display = 'none'; }
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) { closeModal(); }
+        });
+    }
+
+    /**
+     * Fungsi untuk membuat dan menganimasikan partikel di latar belakang.
+     */
+    function initParticles() {
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particleCanvas.appendChild(particle);
+            const size = Math.random() * 5 + 2;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${x}vw`;
+            particle.style.top = `${y}vh`;
+            particle.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
+        }
+    }
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+        @keyframes floatUp {
+            from { transform: translateY(0) rotate(0deg); opacity: 1; }
+            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // --- BAGIAN 3: MENJALANKAN FUNGSI DAN EVENT LISTENER ---
+    startTypingEffect();
+    showFloatingPhotos();
+    setupScrollAnimations();
+    setupLightbox();
+    startButton.addEventListener('click', startJourney);
 });
